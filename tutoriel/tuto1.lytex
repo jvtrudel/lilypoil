@@ -1,0 +1,63 @@
+\documentclass[letter]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+\title{Transcrire une partition avec lilypond}
+\author{jvtrudel}
+\date{5 février 2016}
+
+\begin{document}
+
+\maketitle
+
+
+Liypond permet de produire des partitions musicales à partir de fichiers textes.
+Bien que moins spectaculaire qu'un outil graphique, lilypond est très puissant.
+//
+
+Vous pouvez vous rendre sur le site de \href{http://lilybin.com/}{lilybin} pour en faire l'essai en ligne.
+
+
+
+//
+
+\section {Les notes}
+
+\subsection {Hauteur des notes}
+
+\begin{lilypond}
+\include "italiano.ly"
+notesA=\relative sol {
+\override Staff.Clef.stencil = ##f
+ do re mi fa sol la si }
+
+voixA=\lyricmode{ do re mi fa sol la si  }
+
+ \score{
+    \new Staff <<
+       \new Voice = "voixA" <<
+         \notesA
+       >>
+       \lyricsto "voixA" \new Lyrics \voixA
+     >>
+
+ 	 }
+
+\end{lilypond}
+
+Les options sont indiquées entre crochets.
+
+\begin{lilypond}[fragment,quote,staffsize=26,verbatim]
+  c'4 f16
+\end{lilypond}
+
+Des extraits plus conséquents peuvent faire l'objet d'un fichier
+indépendant, alors inclus avec \verb+\lilypondfile+.
+
+%\lilypondfile[quote,noindent]{screech-and-boink.ly}
+
+(Si besoin, remplacez @file{screech-and-boink.ly} par
+n'importe quel fichier @file{.ly} qui se trouve dans
+le même répertoire que le présent fichier.)
+
+\end{document}
